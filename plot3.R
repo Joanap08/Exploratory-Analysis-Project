@@ -15,3 +15,16 @@ balt.agg <- aggregate(mary[c("Emissions")], list(type = mary$type, year = mary$y
 png(filename="plot3.png")
 qplot(year, Emissions, data = balt.agg, color = type, geom= "line")+ ggtitle("Total PM2.5 Emissions in Baltimore by Source ") + xlab("Year") + ylab("PM2.5 Emissions(tons)")  
 dev.off()
+
+## trying alternatives still to look better
+png(filename="plot3.png")
+require(ggplot2)
+ggplot(data=baltagg, aes(x=year, y=Emissions, fill=year))+
+         geom_bar(stat="identity")+
+  geom_text(aes(label=Emissions),color="Black")+
+  
+  ggtitle("Total PM2.5 Emissions in Baltimore by Source ")+
+  xlab("Year")+ 
+  ylab("PM2.5 Emissions(tons)")
+           
+dev.off()
