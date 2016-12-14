@@ -11,20 +11,7 @@ mary<-NEI[NEI$fips=="24510",]
 
 balt.agg <- aggregate(mary[c("Emissions")], list(type = mary$type, year = mary$year), sum)
 
-#qplot
+#ggplot
 png(filename="plot3.png")
-qplot(year, Emissions, data = balt.agg, color = type, geom= "line")+ ggtitle("Total PM2.5 Emissions in Baltimore by Source ") + xlab("Year") + ylab("PM2.5 Emissions(tons)")  
-dev.off()
-
-## trying alternatives still to look better
-png(filename="plot3.png")
-require(ggplot2)
-ggplot(data=baltagg, aes(x=year, y=Emissions, fill=year))+
-         geom_bar(stat="identity")+
-  geom_text(aes(label=Emissions),color="Black")+
-  
-  ggtitle("Total PM2.5 Emissions in Baltimore by Source ")+
-  xlab("Year")+ 
-  ylab("PM2.5 Emissions(tons)")
-           
+ggplot(balt.agg, aes(x=year,y=Emissions))+geom_point(aes(shape=factor(type),colour=factor(type),size=4))+ggtitle("Total PM2.5 Emissions in Baltimore by Source ")+ xlab("Year") + ylab("PM2.5 Emissions(tons)")
 dev.off()
