@@ -15,7 +15,7 @@ both1<-baltimore[baltimore$SCC %in% extract1$SCC,]
 #we can work again with total emission amounts
 motorsources<-summarise(group_by(both1,year), Emissions=sum(Emissions))
 
-#plot as bar since it is irrelevant any otger details from the Table
+#plot as line since it is more clear the changes among years
 png(filename = "plot5.png")
 ggplot(motorsources,aes(x=factor(year), y=Emissions, group=1, label=round(Emissions,2)))+
   geom_line(color="light blue",size= 1.5)+
